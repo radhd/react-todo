@@ -26,11 +26,7 @@ function TodoCard() {
         <input type="text" onChange={handleChange} value={userInput} />
         <button type="submit">+</button>
       </form>
-      <div>
-        {submittedValues.map((value, index) => (
-          <div key={index}>{value}</div>
-        ))}
-      </div>
+      <div>{renderDivs()}</div>
     </div>
   );
 }
