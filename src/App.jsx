@@ -1,7 +1,10 @@
+import TodoCard from "./components/TodoCard/TodoCard";
+import styles from "./App.module.css";
+
 function App() {
   return (
-    <div>
-      <h1>h1</h1>
+    <div className={styles.app}>
+      <TodoCard />
     </div>
   );
 }
