@@ -3,17 +3,24 @@ import { useState } from "react";
 
 function TodoCard() {
   const [userInput, setUserInput] = useState("");
+  const [submittedValues, setSubmittedValues] = useState([]);
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
-    console.log(userInput);
+  };
+
+  const onClickSubmit = (event) => {
+    event.preventDefault();
+    setSubmittedValues([...submittedValues, userInput]);
+    setUserInput("");
+    console.log(submittedValues);
   };
 
   return (
     <div className={styles.cardContainer}>
-      <form>
+      <form onSubmit={onClickSubmit}>
         <input type="text" onChange={handleChange} value={userInput} />
-        <button>+</button>
+        <button type="submit">+</button>
       </form>
       <div></div>
     </div>
