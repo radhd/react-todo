@@ -16,13 +16,21 @@ function TodoCard() {
     console.log(submittedValues);
   };
 
+  const renderDivs = () => {
+    return submittedValues.map((value, index) => <li key={index}>{value}</li>);
+  };
+
   return (
     <div className={styles.cardContainer}>
       <form onSubmit={onClickSubmit}>
         <input type="text" onChange={handleChange} value={userInput} />
         <button type="submit">+</button>
       </form>
-      <div></div>
+      <div>
+        {submittedValues.map((value, index) => (
+          <div key={index}>{value}</div>
+        ))}
+      </div>
     </div>
   );
 }
