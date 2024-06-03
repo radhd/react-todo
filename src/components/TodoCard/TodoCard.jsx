@@ -1,16 +1,11 @@
 import styles from "./TodoCard.module.css";
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import DateNow from "./date/DateNow";
 
 function TodoCard() {
   const [userInput, setUserInput] = useState("");
   const [submittedValues, setSubmittedValues] = useState([]);
-
-  const now = new Date();
-  const formatDate = (date) => {
-    const options = { weekday: "short", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  };
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
@@ -45,8 +40,7 @@ function TodoCard() {
   return (
     <div className={styles.cardContainer}>
       <div>
-        <div>{formatDate(now)}</div>
-        <div>{now.toLocaleTimeString()}</div>
+        <DateNow />
       </div>
       <form onSubmit={onClickSubmit}>
         <input type="text" onChange={handleChange} value={userInput} />
