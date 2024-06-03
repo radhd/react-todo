@@ -1,9 +1,14 @@
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+// Datepicker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function FormTodo() {
   const [userInput, setUserInput] = useState("");
   const [submittedValues, setSubmittedValues] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (event) => {
     setUserInput(event.target.value);
@@ -11,9 +16,6 @@ function FormTodo() {
 
   const onClickSubmit = (event) => {
     event.preventDefault();
-    setSubmittedValues([...submittedValues, userInput]);
-    setUserInput("");
-    console.log(submittedValues);
   };
 
   const onClickRemoveValue = (indexToRemove) => {
@@ -21,6 +23,23 @@ function FormTodo() {
     setSubmittedValues(
       submittedValues.filter((_, index) => index !== indexToRemove)
     );
+  };
+
+  // Datepicker
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const openDatePicker = () => {
+    setIsOpen(true);
+  };
+
+  const closedDatePicker = () => {
+    setIsOpen(false);
+    setSubmittedValues([...submittedValues, userInput]);
+    setUserInput("");
+    console.log("Submited Values", submittedValues);
   };
 
   const renderDivs = () => {
@@ -39,7 +58,16 @@ function FormTodo() {
     <>
       <form onSubmit={onClickSubmit}>
         <input type="text" onChange={handleChange} value={userInput} />
-        <button type="submit">+</button>
+        <DatePicker
+          selected={startDate}
+          onChange={handleDateChange}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={15}
+          customInput={<button>+</button>}
+          onCalendarOpen={openDatePicker}
+          onCalendarClose={closedDatePicker}
+        />
       </form>
       <ul>{renderDivs()}</ul>
     </>
