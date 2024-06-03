@@ -1,5 +1,6 @@
 import styles from "./TodoCard.module.css";
 import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 
 function TodoCard() {
   const [userInput, setUserInput] = useState("");
@@ -13,11 +14,25 @@ function TodoCard() {
     event.preventDefault();
     setSubmittedValues([...submittedValues, userInput]);
     setUserInput("");
-    console.log(submittedValues);
   };
 
+  const onClickRemoveValue = (indexToRemove) => {
+    console.log("Click");
+    setSubmittedValues(
+      submittedValues.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
+  // Itirate throught an array
   const renderDivs = () => {
-    return submittedValues.map((value, index) => <li key={index}>{value}</li>);
+    return submittedValues.map((value, index) => (
+      <li key={index}>
+        {value}
+        <span onClick={() => onClickRemoveValue(index)}>
+          <DeleteIcon sx={{ color: "red" }} />
+        </span>
+      </li>
+    ));
   };
 
   return (
@@ -26,7 +41,7 @@ function TodoCard() {
         <input type="text" onChange={handleChange} value={userInput} />
         <button type="submit">+</button>
       </form>
-      <div>{renderDivs()}</div>
+      <ul>{renderDivs()}</ul>
     </div>
   );
 }
