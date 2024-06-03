@@ -6,6 +6,12 @@ function TodoCard() {
   const [userInput, setUserInput] = useState("");
   const [submittedValues, setSubmittedValues] = useState([]);
 
+  const now = new Date();
+  const formatDate = (date) => {
+    const options = { weekday: "short", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  };
+
   const handleChange = (event) => {
     setUserInput(event.target.value);
   };
@@ -28,6 +34,7 @@ function TodoCard() {
     return submittedValues.map((value, index) => (
       <li key={index}>
         {value}
+        <input type="checkbox" />
         <span onClick={() => onClickRemoveValue(index)}>
           <DeleteIcon sx={{ color: "red" }} />
         </span>
@@ -37,6 +44,10 @@ function TodoCard() {
 
   return (
     <div className={styles.cardContainer}>
+      <div>
+        <div>{formatDate(now)}</div>
+        <div>{now.toLocaleTimeString()}</div>
+      </div>
       <form onSubmit={onClickSubmit}>
         <input type="text" onChange={handleChange} value={userInput} />
         <button type="submit">+</button>
