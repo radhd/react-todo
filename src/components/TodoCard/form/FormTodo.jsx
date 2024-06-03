@@ -10,6 +10,11 @@ function FormTodo() {
   const [startDate, setStartDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
+  const dateFormat = startDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    day: "numeric",
+  });
+
   const handleChange = (event) => {
     setUserInput(event.target.value);
   };
@@ -36,10 +41,35 @@ function FormTodo() {
   };
 
   const closedDatePicker = () => {
+    const today = new Date();
+
     setIsOpen(false);
     setSubmittedValues([...submittedValues, userInput]);
+    // Need to add an options where the user can not add empty input
     setUserInput("");
-    console.log(startDate);
+
+    if (startDate.toDateString() === today.toDateString()) {
+      console.log("Today");
+    } else {
+      console.log(
+        "Date is: ",
+        startDate.toLocaleDateString("en-US", {
+          weekday: "short",
+          day: "numeric",
+        })
+      );
+    }
+  };
+
+  const showHours = () => {
+    const hoursFormat = startDate.getHours();
+    const minutesFormat = startDate.getMinutes();
+    const periodFormat = hoursFormat >= 12 ? "PM" : "AM";
+    const formattedTime = `${hoursFormat % 12 || 12}:${
+      minutesFormat < 10 ? "0" : ""
+    }${minutesFormat} ${periodFormat}`;
+
+    return formattedTime;
   };
 
   const renderDivs = () => {
@@ -47,6 +77,10 @@ function FormTodo() {
       <li key={index}>
         {value}
 
+        <span>
+          {" "}
+          {dateFormat} at {showHours()}
+        </span>
         <input type="checkbox" />
         <span onClick={() => onClickRemoveValue(index)}>
           <DeleteIcon sx={{ color: "red" }} />
@@ -68,6 +102,7 @@ function FormTodo() {
           customInput={<button>+</button>}
           onCalendarOpen={openDatePicker}
           onCalendarClose={closedDatePicker}
+          // Need to add mindate mintime where user can not select time in the past
         />
       </form>
       <ul>{renderDivs()}</ul>
