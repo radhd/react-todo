@@ -39,13 +39,14 @@ function FormTodo() {
     setIsOpen(false);
     setSubmittedValues([...submittedValues, userInput]);
     setUserInput("");
-    console.log("Submited Values", submittedValues);
+    console.log(startDate);
   };
 
   const renderDivs = () => {
     return submittedValues.map((value, index) => (
       <li key={index}>
         {value}
+
         <input type="checkbox" />
         <span onClick={() => onClickRemoveValue(index)}>
           <DeleteIcon sx={{ color: "red" }} />
