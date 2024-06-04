@@ -11,6 +11,15 @@ function FormTodo() {
   const [isOpen, setIsOpen] = useState(false);
   const [timestamp, setTimestamp] = useState([]);
 
+  const toggleCompleted = (index) => {
+    const newSubmittedValues = [...submittedValues];
+    newSubmittedValues[index] = {
+      ...newSubmittedValues[index],
+      completed: !newSubmittedValues[index].completed,
+    };
+    setSubmittedValues(newSubmittedValues);
+  };
+
   const dateFormat = startDate.toLocaleDateString("en-US", {
     weekday: "short",
     day: "numeric",
@@ -25,10 +34,18 @@ function FormTodo() {
   };
 
   const onClickRemoveValue = (indexToRemove) => {
-    setSubmittedValues(
-      submittedValues.filter((_, index) => index !== indexToRemove)
+    const newSubmittedValues = submittedValues.filter(
+      (_, index) => index !== indexToRemove
     );
+
     setTimestamp(timestamp.filter((_, index) => index !== indexToRemove));
+
+    setSubmittedValues(
+      newSubmittedValues.map((item) => {
+        const { completed, ...rest } = item;
+        return rest;
+      })
+    );
   };
 
   // Datepicker
@@ -43,7 +60,9 @@ function FormTodo() {
 
   const closedDatePicker = () => {
     if (userInput.trim().length !== 0) {
-      setSubmittedValues([...submittedValues, userInput]);
+      const newItem = { value: userInput, completed: false };
+
+      setSubmittedValues([...submittedValues, newItem]);
       setTimestamp([...timestamp, showHours()]);
     }
 
@@ -68,11 +87,10 @@ function FormTodo() {
   };
 
   const renderDivs = () => {
-    return submittedValues.map((value, index) => (
-      <li key={index}>
-        {value} {timestamp[index]}
-        <span> {/* {dateFormat} at {showHours()} */}</span>
-        <input type="checkbox" />
+    return submittedValues.map((item, index) => (
+      <li key={index} style={{ color: item.completed ? "red" : "inherit" }}>
+        {item.value} {timestamp[index]}
+        <input type="checkbox" onClick={() => toggleCompleted(index)} />
         <span onClick={() => onClickRemoveValue(index)}>
           <DeleteIcon sx={{ color: "red" }} />
         </span>
