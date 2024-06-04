@@ -91,7 +91,7 @@ function FormTodo() {
           customInput={<button>+</button>}
           onCalendarOpen={openDatePicker}
           onCalendarClose={closedDatePicker}
-          // Need to add mindate mintime where user can not select time in the past
+          minDate={new Date()}
         />
       </form>
       <ul>{renderDivs()}</ul>
