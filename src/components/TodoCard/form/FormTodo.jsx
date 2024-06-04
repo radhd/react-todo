@@ -3,6 +3,7 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 // Datepicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TodoItem from "../TodoItem/TodoItem";
 
 function FormTodo() {
   const [userInput, setUserInput] = useState("");
@@ -88,13 +89,15 @@ function FormTodo() {
 
   const renderDivs = () => {
     return submittedValues.map((item, index) => (
-      <li key={index} style={{ color: item.completed ? "red" : "inherit" }}>
-        {item.value} {timestamp[index]}
-        <input type="checkbox" onClick={() => toggleCompleted(index)} />
-        <span onClick={() => onClickRemoveValue(index)}>
-          <DeleteIcon sx={{ color: "red" }} />
-        </span>
-      </li>
+      <ul key={index}>
+        <TodoItem
+          key={index}
+          item={item}
+          timestamp={timestamp[index]}
+          toggleCompleted={() => toggleCompleted(index)}
+          onClickRemoveValue={() => onClickRemoveValue(index)}
+        />
+      </ul>
     ));
   };
 
