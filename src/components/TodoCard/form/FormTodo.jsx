@@ -1,5 +1,4 @@
 import { useState } from "react";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 // Datepicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
