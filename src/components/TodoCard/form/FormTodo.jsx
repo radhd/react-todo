@@ -3,6 +3,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TodoItem from "../TodoItem/TodoItem";
+import TodoInput from "../TodoInput/TodoInput";
 
 function FormTodo() {
   const [userInput, setUserInput] = useState("");
@@ -103,7 +104,7 @@ function FormTodo() {
   return (
     <>
       <form onSubmit={onClickSubmit}>
-        <input type="text" onChange={handleChange} value={userInput} />
+        <TodoInput handleChange={handleChange} userInput={userInput} />
         <DatePicker
           selected={startDate}
           onChange={(startDate) => handleDateChange(startDate)}
