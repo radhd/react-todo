@@ -42,10 +42,12 @@ function FormTodo() {
   };
 
   const closedDatePicker = () => {
-    setIsOpen(false);
-    setSubmittedValues([...submittedValues, userInput]);
-    setTimestamp([...timestamp, showHours()]);
+    if (userInput.trim().length !== 0) {
+      setSubmittedValues([...submittedValues, userInput]);
+      setTimestamp([...timestamp, showHours()]);
+    }
 
+    setIsOpen(false);
     setUserInput("");
   };
 
@@ -84,7 +86,7 @@ function FormTodo() {
         <input type="text" onChange={handleChange} value={userInput} />
         <DatePicker
           selected={startDate}
-          onChange={handleDateChange}
+          onChange={(startDate) => handleDateChange(startDate)}
           showTimeSelect
           timeFormat="HH:mm"
           timeIntervals={15}
