@@ -9,6 +9,7 @@ function FormTodo() {
   const [submittedValues, setSubmittedValues] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
+  const [timestamp, setTimestamp] = useState([]);
 
   const dateFormat = startDate.toLocaleDateString("en-US", {
     weekday: "short",
@@ -24,10 +25,10 @@ function FormTodo() {
   };
 
   const onClickRemoveValue = (indexToRemove) => {
-    console.log("Click");
     setSubmittedValues(
       submittedValues.filter((_, index) => index !== indexToRemove)
     );
+    setTimestamp(timestamp.filter((_, index) => index !== indexToRemove));
   };
 
   // Datepicker
@@ -41,27 +42,15 @@ function FormTodo() {
   };
 
   const closedDatePicker = () => {
-    const today = new Date();
-
     setIsOpen(false);
     setSubmittedValues([...submittedValues, userInput]);
-    // Need to add an options where the user can not add empty input
-    setUserInput("");
+    setTimestamp([...timestamp, showHours()]);
 
-    if (startDate.toDateString() === today.toDateString()) {
-      console.log("Today");
-    } else {
-      console.log(
-        "Date is: ",
-        startDate.toLocaleDateString("en-US", {
-          weekday: "short",
-          day: "numeric",
-        })
-      );
-    }
+    setUserInput("");
   };
 
   const showHours = () => {
+    const today = new Date();
     const hoursFormat = startDate.getHours();
     const minutesFormat = startDate.getMinutes();
     const periodFormat = hoursFormat >= 12 ? "PM" : "AM";
@@ -69,18 +58,18 @@ function FormTodo() {
       minutesFormat < 10 ? "0" : ""
     }${minutesFormat} ${periodFormat}`;
 
-    return formattedTime;
+    if (startDate.toDateString() === today.toDateString()) {
+      return `Today ${formattedTime}`;
+    } else {
+      return `${dateFormat} ${formattedTime}`;
+    }
   };
 
   const renderDivs = () => {
     return submittedValues.map((value, index) => (
       <li key={index}>
-        {value}
-
-        <span>
-          {" "}
-          {dateFormat} at {showHours()}
-        </span>
+        {value} {timestamp[index]}
+        <span> {/* {dateFormat} at {showHours()} */}</span>
         <input type="checkbox" />
         <span onClick={() => onClickRemoveValue(index)}>
           <DeleteIcon sx={{ color: "red" }} />
