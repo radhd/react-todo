@@ -123,7 +123,7 @@ function FormTodo() {
           minDate={new Date()}
         />
       </form>
-      <ul>{renderDivs()}</ul>
+      <ul style={{ padding: "8px 30px" }}>{renderDivs()}</ul>
     </>
   );
 }
