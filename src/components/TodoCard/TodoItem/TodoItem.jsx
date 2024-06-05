@@ -1,24 +1,29 @@
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import styles from "./TodoItem.module.css";
-import Checkbox from "@mui/material/Checkbox";
 
 const TodoItem = ({ item, timestamp, toggleCompleted, onClickRemoveValue }) => {
   return (
-    <li
-      className={styles.todoItem}
-      style={{ color: item.completed ? "red" : "inherit" }}
-    >
+    <li className={styles.todoItem}>
       <div>
-        <p className={styles.value}>{item.value}</p>
+        <p
+          style={{
+            textDecoration: item.completed ? "line-through" : "none",
+            transition: "text-decoration 0.3s ease",
+          }}
+          className={styles.value}
+        >
+          {item.value}
+        </p>
         <p className={styles.timestamp}>{timestamp}</p>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
-        {/* <input
-          className={styles.customCheckbox}
-          type="checkbox"
-          onClick={toggleCompleted}
-        /> */}
-        <Checkbox defaultChecked color="success" />
+        <div style={{ position: "relative" }}>
+          <input
+            className={styles.customCheckbox}
+            type="checkbox"
+            onClick={toggleCompleted}
+          />
+        </div>
         <span onClick={onClickRemoveValue}>
           <DeleteIcon sx={{ color: "red" }} />
         </span>
