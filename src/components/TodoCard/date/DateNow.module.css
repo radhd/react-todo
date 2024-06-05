@@ -4,10 +4,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .wrapper {
-  padding: 1.75rem;
+  padding: 13px 28px;
   color: white;
   display: flex;
   flex-direction: column;

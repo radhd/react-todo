@@ -1,6 +1,7 @@
 .cardContainer {
-  background-color: blue;
+  background-color: white;
   width: 430px;
+  border-radius: 10px;
 }
 
 button {

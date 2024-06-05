@@ -1,0 +1,17 @@
+.todoInput {
+  padding: 15px 48px;
+  background-color: #ebeff2;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.customIconColor {
+  color: #20eeb0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 14px;
+}

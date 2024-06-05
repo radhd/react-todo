@@ -89,15 +89,13 @@ function FormTodo() {
 
   const renderDivs = () => {
     return submittedValues.map((item, index) => (
-      <ul key={index}>
-        <TodoItem
-          key={index}
-          item={item}
-          timestamp={timestamp[index]}
-          toggleCompleted={() => toggleCompleted(index)}
-          onClickRemoveValue={() => onClickRemoveValue(index)}
-        />
-      </ul>
+      <TodoItem
+        key={index}
+        item={item}
+        timestamp={timestamp[index]}
+        toggleCompleted={() => toggleCompleted(index)}
+        onClickRemoveValue={() => onClickRemoveValue(index)}
+      />
     ));
   };
 
