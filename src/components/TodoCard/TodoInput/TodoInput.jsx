@@ -3,7 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const TodoInput = ({ handleChange, userInput }) => {
   return (
-    <div style={{ position: "relative", padding: "28px" }}>
+    <div style={{ position: "relative" }}>
       <label htmlFor="todoInput">
         <CheckCircleIcon className={styles.customIconColor} />
       </label>

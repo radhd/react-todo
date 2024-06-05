@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TodoItem from "../TodoItem/TodoItem";
 import TodoInput from "../TodoInput/TodoInput";
+import Button from "../../Button/Button";
 
 function FormTodo() {
   const [userInput, setUserInput] = useState("");
@@ -101,7 +102,14 @@ function FormTodo() {
 
   return (
     <>
-      <form onSubmit={onClickSubmit}>
+      <form
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: "28px",
+        }}
+        onSubmit={onClickSubmit}
+      >
         <TodoInput handleChange={handleChange} userInput={userInput} />
         <DatePicker
           selected={startDate}
@@ -109,7 +117,7 @@ function FormTodo() {
           showTimeSelect
           timeFormat="HH:mm"
           timeIntervals={15}
-          customInput={<button>+</button>}
+          customInput={<Button>+</Button>}
           onCalendarOpen={openDatePicker}
           onCalendarClose={closedDatePicker}
           minDate={new Date()}
