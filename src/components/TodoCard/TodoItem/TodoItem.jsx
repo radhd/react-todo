@@ -1,6 +1,6 @@
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import styles from "./TodoItem.module.css";
-import { Checkbox, makeStyles } from "@mui/material/Checkbox";
+import Checkbox from "@mui/material/Checkbox";
 
 const TodoItem = ({ item, timestamp, toggleCompleted, onClickRemoveValue }) => {
   return (
